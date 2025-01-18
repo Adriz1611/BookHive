@@ -1,0 +1,17 @@
+user model--
+full name-string
+email-string
+password-string
+isAdmin-boolean
+orders-array
+contact-number
+
+product
+image
+bookName
+bookDecription
+price
+dicount
+bgColor
+panelColor
+
