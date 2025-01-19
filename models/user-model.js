@@ -18,10 +18,6 @@ const userSchema = new mongoose.Schema({
         type: Array,
         default: []
     },
-    isAdmin: {
-        type: Boolean,
-        default: false
-    },
     orders: {
         type: Array,
         default: []
