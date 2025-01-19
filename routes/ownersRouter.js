@@ -25,11 +25,5 @@ router.get("/", (req, res) => {
         res.status(201).send(createdOwner);
 
     })
-
-    
-
-
-
-    
     
 module.exports = router;
