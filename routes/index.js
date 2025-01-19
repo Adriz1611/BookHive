@@ -7,7 +7,7 @@ router.get("/", function (req, res) {
   res.render("index", { error });
 });
 
-router.get("/shop", isloggedin, function (req, res) {
+router.get("/shop", function (req, res) {
   res.render("shop");
 });
 
