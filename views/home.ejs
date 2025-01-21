@@ -1,5 +1,22 @@
 <%- include('./partials/header') %>
-<div className="flex flex-col items-center justify-center h-screen">
-    <h1 >Hi</h1>
-</div>
+<main class="text-center py-16 bg-white">
+    <h2 class="text-2xl md:text-4xl font-[Newsreader] text-gray-800">
+        "Turn the <span class="italic">Page</span> to Your <span class="italic">Next Favorite Book</span>,<br> Delivered
+        Straight to Your Door."
+    </h2>
+    <a href="/shop"
+        class="mt-6 inline-block bg-green-900 text-white font-[Raleway] py-3 px-6 rounded-xl hover:bg-green-800 transition">
+        Browse Our Store
+    </a>
+</main>
+
+<!-- Images Section -->
+<section class="flex flex-wrap justify-center gap-8 p-8 bg-gray-50">
+    <div class="max-w-sm w-84 h-92">
+        <img src="/images/bookcover1.jpg" alt="Book and bag" class="rounded-md shadow-md w-full h-full object-cover">
+    </div>
+    <div class="max-w-sm w-64 h-72 mt-24">
+        <img src="/images/bookcover2.jpg" alt="Flowers and book" class="rounded-md shadow-md w-full h-full object-cover">
+    </div>
+</section>
     <%- include('./partials/footer') %>
