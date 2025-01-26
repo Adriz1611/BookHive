@@ -1,61 +1,101 @@
-<%- include('./partials/header') %>
-<main class="text-center py-16 bg-white">
-    <h2 class="text-2xl md:text-4xl font-[Newsreader] text-gray-800">
-        "Turn the <span class="italic">Page</span> to Your <span class="italic">Next Favorite Book</span>,<br> Delivered
-        Straight to Your Door."
-    </h2>
-    <a href="/shop"
-        class="mt-6 inline-block bg-green-900 text-white font-[Raleway] py-3 px-6 rounded-xl hover:bg-green-800 transition">
-        Browse Our Store
-    </a>
-</main>
+<!DOCTYPE html>
+<html lang="en">
 
-<!-- Images Section -->
-<section class="flex flex-wrap justify-center gap-8 p-8 bg-gray-50">
-    <div class="max-w-sm w-84 h-92">
-        <img src="/images/bookcover1.jpg" alt="Book and bag" class="rounded-md shadow-md w-full h-full object-cover">
-    </div>
-    <div class="max-w-sm w-64 h-72 mt-24">
-        <img src="/images/bookcover2.jpg" alt="Flowers and book" class="rounded-md shadow-md w-full h-full object-cover">
-    </div>
-</section>
-         
-    <div class="container mx-auto px-8 py-8 mt-32 ">
-        <h2 class="text-center text-5xl font-[Newsreader] mb-32">Our Best Sellers</h2>
-        <div class="flex flex-wrap justify-center gap-4">
-            <!-- Image 1 -->
-            <div class="flex justify-center">
-            <img src="/images/All the Tomorrows [Book].jpg" alt="Best Seller 1"
-                class="w-40 h-60 object-cover rounded-md">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@400..700&display=swap" rel="stylesheet">
+    <style>
+        .newsreader-italic {
+            font-family: 'Newsreader-Italic', serif;
+        }
+
+        .newsreader-regular {
+            font-family: 'Newsreader', serif;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <%- include('./partials/navbar'); %>
+
+        <main class="container mx-auto px-4">
+            <!-- Hero Section -->
+            <div class="text-center mt-16 mb-24">
+                <p class="newsreader-regular text-4xl md:text-5xl mb-12">
+                    <span class="tracking-[0.64px]">"Turn the</span>
+                    <span class="newsreader-italic italic tracking-[0.64px]"> Page</span>
+                    <span class="tracking-[0.64px]"> to Your </span>
+                    <span class="newsreader-italic italic tracking-[0.64px]">Next Favorite Book,</span><br>
+                    <span class="tracking-[0.64px]">Delivered Straight to Your Door."</span>
+                </p>
+                <div class="flex justify-center">
+                   <a href="/shop" >
+                    <button class="bg-[#1a3a3a] text-[#d9d9d9] px-8 py-2 rounded-lg font-[Raleway] text-xl">
+                        Browse Our Store
+                    </button>
+                   </a>
+                </div>
             </div>
-            <!-- Image 2 -->
-            <div class="flex justify-center">
-            <img src="/images/Present Future_ Business, Science, And The Deep Tech Revolu___.jpg" alt="Best Seller 2"
-                class="w-40 h-60 object-cover rounded-md">
+
+            <!-- Image Section -->
+        <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-32 px-8">
+            <!-- First Image -->
+            <div class="flex-shrink-0">
+                <img class="w-[522px] h-[700px] object-cover rounded-lg shadow-xl" src="/images/bookcover1.jpg"
+                    alt="Main book cover">
             </div>
-            <!-- Image 3 -->
-            <div class="flex justify-center">
-            <img src="/images/How the Earth got its Beauty.jpg" alt="Best Seller 3"
-                class="w-40 h-60 object-cover rounded-md">
-            </div>
-            <!-- Image 4 -->
-            <div class="flex justify-center">
-            <img src="/images/Wings of Fire.jpg" alt="Best Seller 4" class="w-40 h-60 object-cover rounded-md">
-            </div>
-            <!-- Image 5 -->
-            <div class="flex justify-center">
-            <img src="/images/These Historical Fiction Novels Will Sweep You Away.jpg" alt="Best Seller 5"
-                class="w-40 h-60 object-cover rounded-md">
-            </div>
-            <!-- Image 6 -->
-            <div class="flex justify-center">
-            <img src="/images/Robin_ The Definitive Biography Of Robin Williams.jpg" alt="Best Seller 6"
-                class="w-40 h-60 object-cover rounded-md">
+        
+            <!-- Second Image -->
+            <div class="flex-shrink-0 mt-8 md:mt-0">
+                <img class="w-[500px] h-[577px] object-cover rounded-lg shadow-xl" src="/images/bookcover2.jpg"
+                    alt="Secondary book cover">
             </div>
         </div>
-    </div>
-      
 
-    
 
-    <%- include('./partials/footer') %>
+            <!-- Best Sellers Section -->
+            <section class="mb-32">
+                <h2 class="newsreader-italic text-5xl text-[#1a3a3a] text-center mb-16">
+                    Our Best Sellers
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 px-8 justify-items-center">
+                    <div class="grid gap-12 w-full max-w-[328px]">
+                        <img class="w-full h-[454px] object-cover" src="/images/How the Earth got its Beauty.jpg"
+                            alt="Book cover">
+                        <img class="w-full h-[454px] object-cover"
+                            src="/images/These Historical Fiction Novels Will Sweep You Away.jpg" alt="Book cover">
+                    </div>
+
+                    <div class="grid gap-12 w-full max-w-[328px]">
+                        <img class="w-full h-[454px] object-cover" src="/images/Wings of Fire.jpg" alt="Book cover">
+                        <img class="w-full h-[454px] object-cover"
+                            src="/images/Present Future_ Business, Science, And The Deep Tech Revolu___.jpg"
+                            alt="Book cover">
+                    </div>
+
+                    <div class="grid gap-12 w-full max-w-[328px]">
+                        <img class="w-full h-[454px] object-cover"
+                            src="/images/Robin_ The Definitive Biography Of Robin Williams.jpg" alt="Book cover">
+                        <img class="w-full h-[454px] object-cover" src="/images/All the Tomorrows [Book].jpg"
+                            alt="Book cover">
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <%- include('./partials/footer'); %>
+</body>
+
+</html>
