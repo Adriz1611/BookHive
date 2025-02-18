@@ -10,6 +10,7 @@ router.post("/create", upload.single("image"), async function (req, res) {
 
     // Create the product using your Mongoose model
     let product = await productModel.create({
+      img: req.file.buffer,
       name,
       price,
       discount,
@@ -22,8 +23,8 @@ router.post("/create", upload.single("image"), async function (req, res) {
     req.flash("success", "Product created successfully.");
 
     // Redirect to the admin page
-    // res.redirect("/owners/admin");
-    res.send(product);
+    res.redirect("/owners/admin");
+    
   } catch (err) {
     // Send the error message if something goes wrong
     res.send(err.message);
