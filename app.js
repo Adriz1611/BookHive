@@ -14,6 +14,7 @@ const loginRouter = require("./routes/loginRouter");
 const homeRouter = require("./routes/homeRouter");
 const signupRouter = require("./routes/signupRouter");
 const blogRouter = require("./routes/blogRouter");
+const productRoutes = require("./routes/productRoutes");
 
 const db = require("./config/mongoose-connection");
 
@@ -36,6 +37,7 @@ app.use("/login", loginRouter);
 app.use("/owners", ownersRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsCreateRouter);
+app.use("/product", productRoutes);
 app.use("/signup",signupRouter);
 app.use("/blog",blogRouter);
 
