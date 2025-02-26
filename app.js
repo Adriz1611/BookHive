@@ -8,7 +8,7 @@ const flash = require("connect-flash");
 require("dotenv").config();
 
 const ownersRouter = require("./routes/ownersRouter");
-const productsRouter = require("./routes/productsRouter");
+const productsCreateRouter = require("./routes/productsCreateRouter");
 const usersRouter = require("./routes/usersRouter");
 const loginRouter = require("./routes/loginRouter");
 const homeRouter = require("./routes/homeRouter");
@@ -35,7 +35,7 @@ app.use("/", homeRouter);
 app.use("/login", loginRouter);
 app.use("/owners", ownersRouter);
 app.use("/users", usersRouter);
-app.use("/products", productsRouter);
+app.use("/products", productsCreateRouter);
 app.use("/signup",signupRouter);
 app.use("/blog",blogRouter);
 

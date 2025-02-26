@@ -10,7 +10,7 @@ router.post("/create", upload.single("image"), async function (req, res) {
 
     // Create the product using your Mongoose model
     let product = await productModel.create({
-      img: req.file.buffer,
+      image: req.file.buffer,
       name,
       price,
       discount,
