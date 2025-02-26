@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-bold text-center mb-6">Your Cart</h1>
+
+        <% if (cart.length===0) { %>
+            <p class="text-center text-gray-600">Your cart is empty.</p>
+            <% } else { %>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                        <thead class="bg-gray-200">
+                            <tr>
+                                <th class="py-3 px-6 text-left">Image</th>
+                                <th class="py-3 px-6 text-left">Name</th>
+                                <th class="py-3 px-6 text-center">Price</th>
+                                <th class="py-3 px-6 text-center">Discount</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-300">
+                            <% cart.forEach(item=> { %>
+                                <tr class="hover:bg-gray-100">
+                                    <td class="py-3 px-6">
+                                        <img src="/product-image/<%= item.productId %>" alt="<%= item.name %>"
+                                            class="w-20 h-20 object-cover rounded-md">
+                                    </td>
+                                    <td class="py-3 px-6 font-medium text-gray-800">
+                                        <%= item.name %>
+                                    </td>
+                                    <td class="py-3 px-6 text-center">$<%= item.price %>
+                                    </td>
+                                    <td class="py-3 px-6 text-center">
+                                        <%= item.discount %>%
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+                <% } %>
+
+                    <div class="mt-8 text-center">
+                        <a href="/products"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                            Continue Shopping
+                        </a>
+                    </div>
+    </div>
+
+    <%- include('partials/footer') %>
