@@ -4,28 +4,46 @@ const Product = require("../models/product-model");
 
 router.post("/add/:id", async (req, res) => {
   try {
+    // Find the product by its ID
     const product = await Product.findById(req.params.id);
     if (!product) {
       req.flash("error", "Product not found");
       return res.redirect("back");
     }
 
-    // Initialize cart if not present
+    // Parse quantity from the form submission; default to 1 if invalid.
+    let quantity = parseInt(req.body.quantity, 10);
+    if (!quantity || quantity < 1) {
+      quantity = 1;
+    }
+
+    // Initialize cart if not already present in the session
     if (!req.session.cart) {
       req.session.cart = [];
     }
 
-    // Push only minimal data
-    req.session.cart.push({
-      productId: product._id,
-      name: product.name,
-      price: product.price,
-      discount: product.discount || 0,
-      image: product.image ? product.image.toString("base64") : null // Convert image to base64
-    });
+    // Check if the product already exists in the cart
+    const existingIndex = req.session.cart.findIndex(
+      (item) => item.productId.toString() === product._id.toString()
+    );
+
+    if (existingIndex > -1) {
+      // If product exists, increment its quantity
+      req.session.cart[existingIndex].quantity += quantity;
+    } else {
+      // Otherwise, add new product with the specified quantity
+      req.session.cart.push({
+        productId: product._id,
+        name: product.name,
+        price: product.price,
+        discount: product.discount || 0,
+        image: product.image ? product.image.toString("base64") : null,
+        quantity: quantity,
+      });
+    }
 
     req.flash("success", "Book added to your cart");
-    res.redirect("/cart"); // Redirect to the cart page instead of product page
+    res.redirect("/cart");
   } catch (err) {
     console.error(err);
     req.flash("error", "Something went wrong adding to cart");
