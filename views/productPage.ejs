@@ -1,5 +1,6 @@
 <%- include("./partials/header") %>
 
+
     <!-- Cart Icon in Top Right Corner -->
     <div class="fixed top-4 right-4 z-50">
         <a href="/cart" class="relative block">
@@ -17,8 +18,7 @@
         <div class="flex flex-col md:flex-row md:gap-8">
             <div class="md:w-1/2 mb-6 md:mb-0">
                 <% if (product.image) { %>
-                    <img class="w-full h-auto object-cover rounded"
-                        src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
+                    <img class="w-full h-auto object-cover rounded" src="/<%= product.image %>"
                         alt="<%= product.name %>" />
                     <% } else { %>
                         <div class="w-full h-64 bg-gray-200 flex items-center justify-center">

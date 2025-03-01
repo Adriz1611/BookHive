@@ -42,7 +42,7 @@ router.post("/add/:id", async (req, res) => {
       });
     }
 
-    req.flash("success", "Book added to your cart");
+    
     res.redirect("/cart");
   } catch (err) {
     console.error(err);
