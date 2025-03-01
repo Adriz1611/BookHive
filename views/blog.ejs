@@ -1,4 +1,5 @@
 <%- include('./partials/header') %>
+<%- include('./partials/navbar') %>
     <!DOCTYPE html>
     <html lang="en">
     
@@ -14,27 +15,7 @@
     
     <body class="bg-white min-h-screen flex flex-col">
     
-        <!-- NAVIGATION -->
-        <header class="w-full border-b border-gray-200">
-            <nav class="container mx-auto flex items-center justify-between py-4 px-4 md:px-8">
-                <!-- Left side (Logo or text) -->
-                <div class="text-xl font-semibold">
-                    BookHive
-                </div>
-    
-                <!-- Navigation links -->
-                <ul class="flex items-center space-x-6 text-sm md:text-base">
-                    <li class="hover:underline cursor-pointer">HOME</li>
-                    <li class="hover:underline cursor-pointer">STORE</li>
-                    <li class="font-semibold text-[#1a3a3a] cursor-pointer">BLOG</li>
-                    <!-- Replace the placeholder with your cart icon/image if desired -->
-                    <li>
-                        <img src="/img/cart.png" alt="Cart" class="w-5 h-5 md:w-6 md:h-6 object-cover" />
-                    </li>
-                    <li class="hover:underline cursor-pointer">LOGIN</li>
-                </ul>
-            </nav>
-        </header>
+       
     
         <!-- MAIN CONTENT -->
         <main class="flex-1 container mx-auto px-4 md:px-8 py-8">

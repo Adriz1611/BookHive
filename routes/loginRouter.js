@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get("/", function (req, res) {
   let error = req.flash("error");
-  res.render("login", { error });
+  res.render("login", { error, activePage: "login" });
 });
 
 

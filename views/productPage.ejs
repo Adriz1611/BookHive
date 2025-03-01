@@ -1,100 +1,265 @@
-<%- include("./partials/header") %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Page</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+  <!-- Font Awesome (optional for icons) -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .marcellus {
+      font-family: 'Marcellus', serif;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
+    .product-image:hover {
+      transform: scale(1.03);
+      transition: transform 0.5s ease;
+    }
+    .quantity-input::-webkit-inner-spin-button, 
+    .quantity-input::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    body {
+      font-family: 'Marcellus', serif;
+    }
+  </style>
+</head>
+<body class="bg-green-100 min-h-screen">
+  <div class="max-w-7xl mx-auto px-6 sm:px-8 py-12">
+    <!-- Breadcrumb Navigation -->
+    <nav class="flex mb-6 text-sm">
+      <a href="#" class="hover:text-gray-800">Home</a>
+      <span class="mx-2">/</span>
+      <a href="#" class="hover:text-gray-800">Books</a>
+      <span class="mx-2">/</span>
+      <span class="text-gray-800 font-medium"><%= product.name || 'Book Name' %></span>
+    </nav>
 
-
-    <!-- Cart Icon in Top Right Corner -->
-    <div class="fixed top-4 right-4 z-50">
-        <a href="/cart" class="relative block">
-            <i class="fas fa-shopping-cart text-3xl text-gray-700"></i>
-            <% if (cart && cart.length> 0) { %>
-                <span
-                    class="absolute top-0 right-0 inline-flex items-center justify-center px-1 py-0.5 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">
-                    <%= cart.length %>
-                </span>
-                <% } %>
-        </a>
-    </div>
-
-    <div class="max-w-6xl mx-auto px-4 py-8">
-        <div class="flex flex-col md:flex-row md:gap-8">
-            <div class="md:w-1/2 mb-6 md:mb-0">
-                <% if (product.image) { %>
-                    <img class="w-full h-auto object-cover rounded" src="/<%= product.image %>"
-                        alt="<%= product.name %>" />
-                    <% } else { %>
-                        <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
-                            No Image
-                        </div>
-                        <% } %>
+    <!-- Product Card -->
+    <div class="flex flex-col md:flex-row md:gap-12 bg-white p-8 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
+      <!-- Image Section -->
+      <div class="md:w-2/5 mb-8 md:mb-0">
+        <div class="sticky top-8">
+          <% if (product.image) { %>
+            <img 
+              class="w-full h-auto object-cover rounded-lg transition-all duration-500 product-image shadow-md" 
+              src="/<%= product.image %>" 
+              alt="<%= product.name %>" 
+            />
+          <% } else { %>
+            <div class="w-full h-96 bg-gray-200 flex items-center justify-center rounded-lg">
+              <span class="text-gray-500">No Image Available</span>
             </div>
-
-            <div class="md:w-1/2 flex flex-col">
-                <h1 class="text-2xl font-bold text-gray-800 mb-2">
-                    <%= product.name %>
-                </h1>
-                <p class="text-xl text-gray-700 mb-4">₹ <%= product.price %>
-                </p>
-
-                <% if (product.discount && product.discount> 0) { %>
-                    <p class="inline-block bg-green-100 text-green-700 px-2 py-1 rounded mb-4">
-                        Discount: <%= product.discount %>%
-                    </p>
-                    <% } %>
-
-                        <% if (product.about) { %>
-                            <p class="text-gray-600 mb-4">
-                                <%= product.about %>
-                            </p>
-                            <% } %>
-
-                                <div class="mt-4">
-                                    <!-- Form for Add to Cart -->
-                                    <form action="/cart/add/<%= product._id %>" method="POST">
-                                        <!-- Quantity Selector -->
-                                        <div class="flex items-center mb-4">
-                                            <button type="button" id="decrement"
-                                                class="px-3 py-1 bg-gray-300 text-gray-800 rounded-l">-</button>
-                                            <input type="text" id="quantity" name="quantity" value="1"
-                                                class="w-16 text-center border-t border-b border-gray-300" />
-                                            <button type="button" id="increment"
-                                                class="px-3 py-1 bg-gray-300 text-gray-800 rounded-r">+</button>
-                                        </div>
-                                        <button type="submit"
-                                            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors">
-                                            Add to Cart
-                                        </button>
-                                    </form>
-                                </div>
-            </div>
+          <% } %>
         </div>
+      </div>
+
+      <!-- Details Section -->
+      <div class="md:w-3/5 flex flex-col">
+        <h1 class="marcellus text-3xl md:text-4xl text-gray-800 mb-3">
+          <%= product.name || 'Book Name' %>
+        </h1>
+        
+        <!-- Rating -->
+        <div class="flex items-center mb-4">
+          <div class="flex text-yellow-400 mr-2">
+            <!-- Example Hardcoded 5 star rating -->
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <span class="text-gray-600">(42 reviews)</span>
+        </div>
+        
+        <!-- Short about -->
+        <p class="text-gray-600 mb-6 leading-relaxed text-lg">
+          <%= product.about || 'A small intro about the book, describing its content and purpose in 2-3 lines.' %>
+        </p>
+
+        <!-- Price & Discount -->
+        <div class="flex items-center mb-6">
+          <span class="text-3xl font-semibold text-gray-800">
+            ₹<%= product.price || '250' %>
+          </span>
+          <% if (product.discount && product.discount > 0) { %>
+            <!-- Crossed-out original price -->
+            <span class="ml-4 line-through text-gray-500">
+              ₹<%= Math.round(product.price / (1 - product.discount/100)) %>
+            </span>
+            <!-- Discount badge -->
+            <span class="ml-3 px-2 py-1 bg-green-100 text-green-800 text-sm font-medium rounded">
+              <%= product.discount %>% OFF
+            </span>
+          <% } %>
+        </div>
+        
+        <!-- Author and Genre -->
+        <div class="mb-6 grid grid-cols-2 gap-4">
+          <div>
+            <span class="text-gray-500 text-sm">AUTHOR</span>
+            <p class="text-gray-800 font-medium"><%= product.author || 'Author Name' %></p>
+          </div>
+          <div>
+            <span class="text-gray-500 text-sm">GENRE</span>
+            <p class="text-gray-800 font-medium"><%= product.genre || 'Genre of the book' %></p>
+          </div>
+        </div>
+
+        <!-- FORM for Add to Cart & Quantity -->
+        <form action="/cart/add/<%= product._id %>" method="POST" class="mb-8">
+          <!-- In case you need the product ID or other hidden fields, add them here:
+          <input type="hidden" name="productId" value="<%= product._id %>" />
+          -->
+
+          <!-- Quantity Controls -->
+          <div class="mb-6">
+            <span class="block text-gray-700 mb-2">Quantity</span>
+            <div class="flex items-center w-full max-w-xs">
+              <button 
+                type="button" 
+                id="decrement" 
+                class="px-4 py-2 bg-gray-200 text-gray-800 rounded-l-lg hover:bg-gray-300 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-700"
+              >
+                −
+              </button>
+              <input 
+                type="number" 
+                id="quantity" 
+                name="quantity" 
+                value="1" 
+                min="1"
+                class="w-20 text-center border-t border-b border-gray-300 py-2 quantity-input focus:outline-none focus:ring-2 focus:ring-green-700" 
+              />
+              <button 
+                type="button" 
+                id="increment" 
+                class="px-4 py-2 bg-gray-200 text-gray-800 rounded-r-lg hover:bg-gray-300 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-green-700"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <button 
+            type="submit" 
+            class="bg-green-700 text-white px-8 py-3 rounded-lg hover:bg-green-800 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-700"
+          >
+            Add to Cart
+          </button>
+        </form>
+        
+        <!-- Shipping Info -->
+        <div class="border border-gray-200 rounded-lg p-4 mb-6">
+          <div class="flex items-start mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-700 mt-0.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <p class="text-gray-700 font-medium">Free shipping</p>
+              <p class="text-gray-500 text-sm">On orders over ₹499</p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-700 mt-0.5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <p class="text-gray-700 font-medium">Secure payment</p>
+              <p class="text-gray-500 text-sm">100% secure payment</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Inline JavaScript for Quantity Increment/Decrement -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const decrementButton = document.getElementById('decrement');
-            const incrementButton = document.getElementById('increment');
-            const quantityInput = document.getElementById('quantity');
+    <!-- Book Description -->
+    <div class="bg-white mt-8 p-8 rounded-xl shadow-lg">
+      <h2 class="text-2xl text-gray-800 mb-4">Book Details</h2>
+      <table class="w-full border-collapse border border-gray-300 text-gray-700 mb-6">
+        <tr>
+          <td class="p-3 border border-gray-300 font-medium bg-gray-50 w-1/4">Book Author</td>
+          <td class="p-3 border border-gray-300"><%= product.author || 'Author Name' %></td>
+        </tr>
+        <tr>
+          <td class="p-3 border border-gray-300 font-medium bg-gray-50">Genre</td>
+          <td class="p-3 border border-gray-300"><%= product.genre || 'Genre of the book' %></td>
+        </tr>
+        <tr>
+          <td class="p-3 border border-gray-300 font-medium bg-gray-50">Rating</td>
+          <td class="p-3 border border-gray-300">
+            <div class="flex text-yellow-400">
+              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+              <span class="text-gray-600 ml-2">(42 reviews)</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="p-3 border border-gray-300 font-medium bg-gray-50">Pages</td>
+          <td class="p-3 border border-gray-300">324</td>
+        </tr>
+        <tr>
+          <td class="p-3 border border-gray-300 font-medium bg-gray-50">Language</td>
+          <td class="p-3 border border-gray-300">English</td>
+        </tr>
+        <tr>
+          <td class="p-3 border border-gray-300 font-medium bg-gray-50">Publication Date</td>
+          <td class="p-3 border border-gray-300">January 15, 2023</td>
+        </tr>
+      </table>
+      
+      <div>
+        <h3 class="font-semibold text-lg mb-2">About this book</h3>
+        <p class="text-gray-700 mb-4 leading-relaxed">
+          <%= product.about || 'A detailed description about the book would go here. This would include information about the plot, characters, themes, and why this book might be interesting or valuable to readers. The description might also include information about the author and their background, as well as any awards or recognition the book has received.' %>
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          Additional paragraphs might go into more depth about specific aspects of the book, such as its literary style, historical context, or cultural significance. This section could also include quotes from reviews or endorsements from other authors or publications.
+        </p>
+      </div>
+    </div>
+  </div>
 
-            decrementButton.addEventListener('click', function () {
-                let currentValue = parseInt(quantityInput.value);
-                if (isNaN(currentValue) || currentValue <= 1) {
-                    currentValue = 1;
-                } else {
-                    currentValue--;
-                }
-                quantityInput.value = currentValue;
-            });
+  <!-- Increment/Decrement Quantity Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const decrementButton = document.getElementById('decrement');
+      const incrementButton = document.getElementById('increment');
+      const quantityInput = document.getElementById('quantity');
 
-            incrementButton.addEventListener('click', function () {
-                let currentValue = parseInt(quantityInput.value);
-                if (isNaN(currentValue)) {
-                    currentValue = 1;
-                } else {
-                    currentValue++;
-                }
-                quantityInput.value = currentValue;
-            });
-        });
-    </script>
+      decrementButton.addEventListener('click', function () {
+        let currentValue = parseInt(quantityInput.value);
+        if (isNaN(currentValue) || currentValue <= 1) {
+          currentValue = 1;
+        } else {
+          currentValue--;
+        }
+        quantityInput.value = currentValue;
+      });
 
-    <%- include("./partials/footer") %>
+      incrementButton.addEventListener('click', function () {
+        let currentValue = parseInt(quantityInput.value);
+        if (isNaN(currentValue)) {
+          currentValue = 1;
+        } else {
+          currentValue++;
+        }
+        quantityInput.value = currentValue;
+      });
+      
+      // Prevent manual input of invalid values
+      quantityInput.addEventListener('change', function() {
+        let currentValue = parseInt(quantityInput.value);
+        if (isNaN(currentValue) || currentValue < 1) {
+          quantityInput.value = 1;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

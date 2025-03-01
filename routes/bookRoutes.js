@@ -12,8 +12,8 @@ router.get("/:id", async (req, res) => {
 
       res.render("productPage", {
         product,
-        cart: req.session.cart || [],
-      });
+        cart: req.session.cart || [], activePage: "shop" }
+      );
   } catch (err) {
     res.status(500).send("Server error");
   }
