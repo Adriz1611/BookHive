@@ -24,18 +24,39 @@ const upload = multer({ storage: storage });
 router.post("/create", upload.single("image"), async (req, res) => {
   try {
     // Destructure fields from the request body
-    let { name, price, discount, bgcolor, panelcolor, textcolor } = req.body;
+    let {
+      name,
+      about,
+      description,
+      author,
+      genre,
+      rating,
+      reviewsCount,
+      pages,
+      language,
+      publicationDate,
+      price,
+      discount,
+      quantity,
+    } = req.body;
 
     // Create the product using the Mongoose model.
-    // Note: We're saving the file path (req.file.path) rather than the file buffer.
+    // Note: We store the file path (req.file.path) rather than the file buffer.
     let product = await Product.create({
       image: req.file.path,
       name,
+      about,
+      description,
+      author,
+      genre,
+      rating,
+      reviewsCount,
+      pages,
+      language,
+      publicationDate,
       price,
       discount,
-      bgcolor,
-      panelcolor,
-      textcolor,
+      quantity,
     });
 
     req.flash("success", "Product created successfully.");
