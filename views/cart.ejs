@@ -1,52 +1,88 @@
 <%- include('partials/header') %>
 
-    <div class="container mx-auto py-8">
-        <h1 class="text-3xl font-bold text-center mb-6">Your Cart</h1>
+<body class="flex flex-col min-h-screen">
 
-        <% if (cart.length===0) { %>
-            <p class="text-center text-gray-600">Your cart is empty.</p>
-            <% } else { %>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-                        <thead class="bg-gray-200">
-                            <tr>
-                                <th class="py-3 px-6 text-left">Image</th>
-                                <th class="py-3 px-6 text-left">Name</th>
-                                <th class="py-3 px-6 text-center">Price</th>
-                                <th class="py-3 px-6 text-center">Discount</th>
-                                <th class="py-3 px-6 text-center">Quantity</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-300">
-                            <% cart.forEach(item=> { %>
-                                <tr class="hover:bg-gray-100">
-                                    <td class="py-3 px-6">
-                                        <img src="/product-image/<%= item.productId %>" alt="<%= item.name %>"
-                                            class="w-20 h-20 object-cover rounded-md">
-                                    </td>
-                                    <td class="py-3 px-6 font-medium text-gray-800">
-                                        <%= item.name %>
-                                    </td>
-                                    <td class="py-3 px-6 text-center">$<%= item.price %>
-                                    </td>
-                                    <td class="py-3 px-6 text-center">
-                                        <%= item.discount %>%
-                                    </td>
-                                    <td class="py-3 px-6 text-center">
-                                        <%= item.quantity %>
-                                    </td>
-                                </tr>
-                                <% }) %>
-                        </tbody>
-                    </table>
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <div class="container mx-auto py-8 px-4">
+            <h1 class="text-3xl font-bold text-center mb-8 text-[#1A3A3A]">Your Cart</h1>
+
+            <% if (cart.length===0) { %>
+                <!-- Empty Cart State -->
+                <p class="text-center text-gray-600 mb-8">Your cart is empty.</p>
+                <div class="text-center">
+                    <a href="/shop"
+                        class="inline-block bg-[#1A3A3A] hover:opacity-90 text-white font-semibold py-2 px-4 rounded">
+                        Continue Shopping
+                    </a>
                 </div>
-                <% } %>
+                <% } else { %>
+                    <!-- Grid Layout: Cart Items & Order Summary -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Cart Items Column -->
+                        <div class="md:col-span-2">
+                            <!-- Loop through each item in the cart -->
+                            <% cart.forEach(item=> { %>
+                                <div
+                                    class="flex flex-col md:flex-row items-center justify-between mb-6 border rounded-lg p-4 hover:shadow-sm transition-shadow">
+                                    <!-- Product Image & Info -->
+                                    <div class="flex items-center mb-4 md:mb-0">
+                                        <img src="/product-image/<%= item.productId %>" alt="<%= item.name %>"
+                                            class="w-20 h-20 object-cover rounded-md mr-4" />
+                                        <div>
+                                            <h2 class="text-lg font-semibold text-gray-700">
+                                                <%= item.name %>
+                                            </h2>
+                                            <!-- Price and discount row -->
+                                            <div class="mt-1 text-gray-600">
+                                                <span>Price: $<%= item.price %></span>
+                                                <span class="ml-2 text-red-500">( <%= item.discount %>% off )</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Quantity -->
+                                    <div class="flex items-center space-x-4">
+                                        <span class="font-medium text-gray-700">Qty: <%= item.quantity %></span>
+                                    </div>
+                                </div>
+                                <% }) %>
 
-                    <div class="mt-8 text-center">
-                        <a href="/shop" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                            Continue Shopping
-                        </a>
+                                    <!-- Continue Shopping Button (below cart items) -->
+                                    <div class="mt-4">
+                                        <a href="/shop"
+                                            class="inline-block bg-[#1A3A3A] hover:opacity-90 text-white font-semibold py-2 px-4 rounded">
+                                            Continue Shopping
+                                        </a>
+                                    </div>
+                        </div>
+
+                        <!-- Order Summary Column -->
+                        <div class="bg-[#1A3A3A] text-white rounded-lg p-6 h-fit self-start">
+                            <h2 class="text-xl font-bold mb-4">Order Summary</h2>
+
+                            <!-- Subtotal calculation (example using reduce). Adjust if your logic differs. -->
+                            <p class="flex justify-between mb-2">
+                                <span>Subtotal</span>
+                                <span>$<%= cart.reduce((acc, item)=> acc + (item.price * item.quantity), 0) %></span>
+                            </p>
+
+                            <hr class="border-gray-200 my-4" />
+
+                            <!-- Checkout Button -->
+                            <button type="button"
+                                class="w-full bg-white text-[#1A3A3A] font-semibold py-2 px-4 rounded hover:bg-gray-100 transition">
+                                Checkout
+                            </button>
+                        </div>
                     </div>
-    </div>
+                    <% } %>
+        </div>
+    </main>
 
-    <%- include('partials/footer') %>
+    <!-- Sticky Footer -->
+    <footer class="text-white py-2 text-center">
+        <%- include('partials/footer') %>
+    </footer>
+</body>
+
+   

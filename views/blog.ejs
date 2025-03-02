@@ -1,79 +1,69 @@
-<%- include('./partials/header') %>
-<%- include('./partials/navbar') %>
-    <!DOCTYPE html>
-    <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8">
-        <title>Blog</title>
-        <!-- If you're using the Tailwind CDN, uncomment below -->
-        <script src="https://cdn.tailwindcss.com"></script> -->
-    
-        <!-- OR if you have a compiled Tailwind CSS file, link it -->
-        <link rel="stylesheet" href="/css/tailwind.css" />
-    </head>
-    
-    <body class="bg-white min-h-screen flex flex-col">
-    
-       
-    
-        <!-- MAIN CONTENT -->
-        <main class="flex-1 container mx-auto px-4 md:px-8 py-8">
-            <!-- HERO / FEATURED SECTION -->
-            <div class="bg-[#d9d9d9] rounded-lg p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6">
-                <!-- Text block -->
-                <div class="md:flex-1">
-                    <h1 class="text-2xl md:text-4xl font-normal text-black mb-4">
-                        Read this month’s top curated books!
-                    </h1>
-                    <button class="text-xl bg-transparent hover:underline transition-all">
-                        READ MORE -&gt;
-                    </button>
-                </div>
-    
-                <!-- Large placeholder image -->
-                <div class="w-full md:w-1/2 bg-white flex items-center justify-center rounded h-48 md:h-64">
-                    <p class="text-gray-400 text-center p-2">
-                        (Image placeholder)
-                    </p>
-                </div>
-            </div>
-    
-            <!-- THREE FEATURED POSTS / GRAY THUMBNAILS -->
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Card 1 -->
-                <div class="bg-[#d9d9d9] rounded-[40px] flex flex-col items-center justify-center h-48 md:h-60 p-4">
-                    <p class="text-center text-base md:text-xl font-medium text-black">
-                        LOREM GRENDBEEBB FBDNBKBDBDKB
-                    </p>
-                </div>
-    
-                <!-- Card 2 -->
-                <div class="bg-[#d9d9d9] rounded-[40px] flex flex-col items-center justify-center h-48 md:h-60 p-4">
-                    <p class="text-center text-base md:text-xl font-medium text-black">
-                        LOREMFBDNBKBDBDKB
-                    </p>
-                </div>
-    
-                <!-- Card 3 -->
-                <div class="bg-[#d9d9d9] rounded-[40px] flex flex-col items-center justify-center h-48 md:h-60 p-4">
-                    <p class="text-center text-base md:text-xl font-medium text-black">
-                        LOR FBDNgiBKBDBDKB
-                    </p>
-                </div>
-            </div>
-        </main>
-    
-        <!-- FOOTER -->
-        <footer class="w-full bg-gray-50 border-t border-gray-200 py-4">
-            <div class="container mx-auto text-center text-sm text-gray-600">
-                &copy; <%= new Date().getFullYear() %> BookHive. All Rights Reserved.
-            </div>
-        </footer>
-    
-    </body>
-    
-    </html>
+<%- include("./partials/header") %>
+    <%- include("./partials/navbar") %>
 
+        <!-- Banner Section -->
+        <div class="w-full h-[300px] bg-cover bg-center relative flex items-center justify-center"
+            style="background-image: url('/images/blog-banner.jpg');">
+            
+        </div>
 
-<%- include('./partials/footer') %>
+        <!-- Main Content Container -->
+        <div class="max-w-6xl mx-auto px-4 py-12 font-[Raleway] ">
+
+            <!-- Book Entry #1 -->
+            <div class="flex flex-col md:flex-row items-start gap-4 py-6 border-b last:border-b-0">
+                <!-- Image Placeholder -->
+                <div class="w-full md:w-32 h-48 bg-gray-200 flex items-center justify-center text-gray-500 shrink-0">
+                    <span>No Image</span>
+                </div>
+                <!-- Text Content -->
+                <div class="flex-1">
+                    <h2 class="text-xl md:text-2xl font-semibold  mb-2">
+                        The Great Gatsby
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        “The Great Gatsby,” a novel by F. Scott Fitzgerald, follows the story of Jay Gatsby and his
+                        unrequited love for Daisy Buchanan.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Book Entry #2 -->
+            <div class="flex flex-col md:flex-row items-start gap-4 py-6 border-b last:border-b-0">
+                <!-- Image Placeholder -->
+                <div class="w-full md:w-32 h-48 bg-gray-200 flex items-center justify-center text-gray-500 shrink-0">
+                    <span>No Image</span>
+                </div>
+                <!-- Text Content -->
+                <div class="flex-1">
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-800 mb-2">
+                        To Kill a Mockingbird
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        Harper Lee’s timeless novel addresses racial injustice and moral growth, as seen through the
+                        eyes of young Scout Finch.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Book Entry #3 -->
+            <div class="flex flex-col md:flex-row items-start gap-4 py-6 border-b last:border-b-0">
+                <!-- Image Placeholder -->
+                <div class="w-full md:w-32 h-48 bg-gray-200 flex items-center justify-center text-gray-500 shrink-0">
+                    <span>No Image</span>
+                </div>
+                <!-- Text Content -->
+                <div class="flex-1">
+                    <h2 class="text-xl md:text-2xl font-semibold text-gray-800 mb-2">
+                        Pride and Prejudice
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed">
+                        Jane Austen’s classic romance explores themes of class, family, and the perils of first
+                        impressions in Regency-era England.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <%- include("./partials/footer") %>
