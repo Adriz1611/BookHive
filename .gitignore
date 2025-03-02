@@ -1,2 +1,11 @@
-node_modules
+# Ignore .env files
 .env
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore all contents within the upload directory
+upload/*
+
+# Except the upload directory itself
+!upload/
