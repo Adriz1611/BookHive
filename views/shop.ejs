@@ -30,7 +30,7 @@
             <aside class="hidden md:block w-[25%] flex-shrink-0 pr-8">
                 <!-- Sort & Category Selects -->
                 <div class="mb-8 space-y-4">
-                    <!-- Sort By -->
+                    <!-- Sort by -->
                     <form action="/shop" method="GET" class="flex items-center gap-2">
                         <label for="sortby" class="text-lg font-semibold">Sort by:</label>
                         <select id="sortby" name="sortby" class="border border-gray-300 rounded px-2 py-1">
@@ -58,21 +58,29 @@
                 </div>
             </aside>
 
+            <!-- Products Grid -->
             <section class="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
                 <% products.forEach(function(product) { %>
-                    <div
-                        class="relative bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden flex flex-col">
-                        <!-- Image or Placeholder -->
-                        <div class="relative h-64 bg-gray-200 flex items-center justify-center">
+                    <div class="relative bg-white rounded-lg shadow hover:shadow-lg
+               transition-shadow duration-300 overflow-hidden flex flex-col">
+                        <!-- Image Container (fixed aspect ratio) -->
+                        <div class="relative w-full aspect-[2/3] bg-gray-200">
                             <% if (product.image) { %>
-                                <img class="object-cover w-full h-full" src="/<%= product.image %>" alt="<%= product.name %>" />
+                                <img src="/<%= product.image %>" alt="<%= product.name %>"
+                                    class="absolute inset-0 w-full h-full object-cover" <!-- If you’d like no cropping
+                                    at all, use object-contain:
+                                    class="absolute inset-0 w-full h-full object-contain bg-white" -->
+                                />
                                 <% } else { %>
-                                    <span class="text-gray-500">No Image</span>
+                                    <span class="text-gray-500 flex items-center justify-center
+                         absolute inset-0">
+                                        No Image
+                                    </span>
                                     <% } %>
                         </div>
-            
+
                         <!-- Book Info -->
-                        <div class="p-4 bg-green-100">
+                        <div class="p-4 bg-green-100 flex-1 flex flex-col justify-between">
                             <h3 class="text-lg font-semibold text-gray-800">
                                 <%= product.name %>
                             </h3>
@@ -80,13 +88,12 @@
                                 ₹ <%= product.price %>
                             </p>
                         </div>
-            
+
                         <!-- Entire Card Clickable -->
                         <a href="/product/<%= product._id %>" class="absolute inset-0"></a>
                     </div>
                     <% }) %>
             </section>
-
         </div>
 
         <%- include('./partials/footer') %>
