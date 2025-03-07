@@ -31,7 +31,7 @@
                                         </h2>
                                         <!-- Price and discount row -->
                                         <div class="mt-1 text-gray-600">
-                                            <span>Price: $<%= item.price %></span>
+                                            <span>Price: ₹<%= item.price %></span>
                                             <span class="ml-2 text-red-500">( <%= item.discount %>% off )</span>
                                         </div>
                                     </div>
@@ -39,7 +39,7 @@
                                 <!-- Quantity -->
                                 <div class="flex items-center space-x-4">
                                     <span class="font-medium text-gray-700">Qty: <%= item.quantity %></span>
-                                    <!-- If you have increment/decrement logic, you can place buttons here -->
+                                    <!-- If you have increment/decrement logic, place those buttons here -->
                                 </div>
                             </div>
                             <% }) %>
@@ -57,21 +57,31 @@
                     <div class="bg-[#1A3A3A] text-white rounded-lg p-6 h-fit self-start">
                         <h2 class="text-xl font-bold mb-4">Order Summary</h2>
 
-                        <!-- Subtotal calculation (example using reduce). Adjust if your logic differs. -->
+                        <!-- Subtotal calculation -->
                         <p class="flex justify-between mb-2">
                             <span>Subtotal</span>
                             <span>
-                                $<%= cart.reduce((acc, item)=> acc + (item.price * item.quantity), 0) %>
+                                ₹<%= cart.reduce((acc, item)=> acc + (item.price * item.quantity), 0) %>
                             </span>
                         </p>
 
                         <hr class="border-gray-200 my-4" />
 
                         <!-- Checkout Button -->
-                        <button type="button"
-                            class="w-full bg-white text-[#1A3A3A] font-semibold py-2 px-4 rounded hover:bg-gray-100 transition">
+                        <!-- Option A: Anchor tag linking to /checkout -->
+                        <a href="/checkout"
+                            class="block w-full text-center bg-white text-[#1A3A3A] font-semibold py-2 px-4 rounded hover:bg-gray-100 transition">
                             Checkout
-                        </button>
+                        </a>
+
+                        <!-- Option B: Form-based approach (if you need POST or any form submission):
+                <form action="/checkout" method="GET">
+                    <button type="submit"
+                            class="w-full bg-white text-[#1A3A3A] font-semibold py-2 px-4 rounded hover:bg-gray-100 transition">
+                        Checkout
+                    </button>
+                </form>
+                -->
                     </div>
                 </div>
                 <% } %>

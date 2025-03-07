@@ -1,5 +1,4 @@
 const express = require("express");
-const isLoggedin = require("../middlewares/isLoggedin");
 const router = express.Router();
 const productModel = require("../models/product-model");
 

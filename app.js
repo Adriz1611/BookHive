@@ -16,6 +16,7 @@ const signupRouter = require("./routes/signupRouter");
 const blogRouter = require("./routes/blogRouter");
 const bookRoutes = require("./routes/bookRoutes");
 const cartRouter = require("./routes/cartRouter");
+const checkoutRouter = require("./routes/checkoutRouter");
 
 const db = require("./config/mongoose-connection");
 
@@ -43,5 +44,7 @@ app.use("/products", productsCreateRouter);//product creation
 app.use("/signup",signupRouter);
 app.use("/blog",blogRouter);
 app.use("/cart", cartRouter);
+app.use("/checkout", checkoutRouter);
+
 
 app.listen(3000);

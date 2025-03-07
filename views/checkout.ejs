@@ -1,0 +1,173 @@
+<%- include('partials/header') %>
+
+    <div class="container mx-auto py-8 px-4 font-[Raleway]">
+        <h1 class="text-3xl font-bold text-center mb-8 text-[#1A3A3A]">Checkout</h1>
+
+        <% if (!cart || cart.length===0) { %>
+            <!-- Empty Cart State -->
+            <p class="text-center text-gray-600 mb-8">Your cart is empty.</p>
+            <div class="text-center">
+                <a href="/shop"
+                    class="inline-block bg-[#1A3A3A] hover:opacity-90 text-white font-semibold py-2 px-4 rounded">
+                    Continue Shopping
+                </a>
+            </div>
+            <% } else { %>
+                <!-- Two-column Layout: Shipping/Payment & Order Summary -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Left Column (Shipping & Payment Forms) -->
+                    <div class="md:col-span-2 bg-white p-6 rounded-lg shadow">
+                        <h2 class="text-xl font-bold mb-4 text-gray-800">Shipping & Payment</h2>
+
+                        <!-- SHIPMENT & PAYMENT FORM -->
+                        <form action="/checkout" method="POST">
+                            <!-- Personal Information -->
+                            <div class="mb-4">
+                                <label for="fullName" class="block text-gray-700 mb-2 font-medium">Full Name</label>
+                                <input type="text" id="fullName" name="fullName" required
+                                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1A3A3A]">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 mb-2 font-medium">Email</label>
+                                <input type="email" id="email" name="email" required
+                                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1A3A3A]">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="phoneNumber" class="block text-gray-700 mb-2 font-medium">Contact
+                                    Number</label>
+                                <input type="text" id="phoneNumber" name="phoneNumber" required
+                                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1A3A3A]"
+                                    placeholder="e.g. +91 9876543210">
+                            </div>
+
+                            <!-- Shipping Address -->
+                            <div class="mb-4">
+                                <label for="addressLine1" class="block text-gray-700 mb-2 font-medium">Address Line
+                                    1</label>
+                                <input type="text" id="addressLine1" name="addressLine1" required
+                                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1A3A3A]"
+                                    placeholder="House number, Street name">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="addressLine2" class="block text-gray-700 mb-2 font-medium">Address Line 2
+                                    (optional)</label>
+                                <input type="text" id="addressLine2" name="addressLine2"
+                                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1A3A3A]"
+                                    placeholder="Apartment, Suite, etc.">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="city" class="block text-gray-700 mb-2 font-medium">City</label>
+                                <input type="text" id="city" name="city" required
+                                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1A3A3A]">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="postalCode" class="block text-gray-700 mb-2 font-medium">Postal Code</label>
+                                <input type="text" id="postalCode" name="postalCode" required
+                                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1A3A3A]">
+                            </div>
+
+                            <!-- Payment Method -->
+                            <div class="mb-4">
+                                <label for="paymentMethod" class="block text-gray-700 mb-2 font-medium">Payment
+                                    Method</label>
+                                <select id="paymentMethod" name="paymentMethod" required
+                                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1A3A3A]">
+                                    <option value="">-- Select --</option>
+                                    <option value="cod">Cash On Delivery</option>
+                                    <option value="card">Credit / Debit Card</option>
+                                </select>
+                            </div>
+
+                            <!-- If Payment Method = Card, ask for Card Details (optional) -->
+                            <div class="mb-4">
+                                <label for="cardNumber" class="block text-gray-700 mb-2 font-medium">Card Number (if
+                                    paying by card)</label>
+                                <input type="text" id="cardNumber" name="cardNumber"
+                                    class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1A3A3A]"
+                                    placeholder="XXXX XXXX XXXX XXXX">
+                            </div>
+
+                            <div class="mb-4 flex space-x-4">
+                                <div class="flex-1">
+                                    <label for="expiry" class="block text-gray-700 mb-2 font-medium">Expiry
+                                        (MM/YY)</label>
+                                    <input type="text" id="expiry" name="expiry"
+                                        class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1A3A3A]"
+                                        placeholder="MM/YY">
+                                </div>
+                                <div class="flex-1">
+                                    <label for="cvv" class="block text-gray-700 mb-2 font-medium">CVV</label>
+                                    <input type="text" id="cvv" name="cvv"
+                                        class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#1A3A3A]"
+                                        placeholder="123">
+                                </div>
+                            </div>
+
+                            <!-- Place Order Button -->
+                            <button type="submit"
+                                class="mt-6 w-full bg-[#1A3A3A] text-white font-semibold py-2 px-4 rounded hover:opacity-90 transition">
+                                Place Order
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Right Column: Order Summary -->
+                    <div class="bg-[#1A3A3A] text-white rounded-lg p-6 h-fit self-start">
+                        <h2 class="text-xl font-bold mb-4">Order Summary</h2>
+
+                        <!-- List each item in the cart -->
+                        <% let subtotal=0; %>
+                            <% cart.forEach(item=> {
+                                subtotal += (item.price * item.quantity);
+                                %>
+                                <div class="flex justify-between mb-2 bg-green-100 text-black p-3 rounded">
+                                    <div>
+                                        <p class="font-semibold">
+                                            <%= item.name %>
+                                        </p>
+                                        <p class="text-sm">Qty: <%= item.quantity %>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <!-- Convert $ to ₹ if needed -->
+                                        <p>₹<%= item.price %>
+                                        </p>
+                                    </div>
+                                </div>
+                                <% }) %>
+
+                                    <!-- Subtotal -->
+                                    <div class="flex justify-between mt-4">
+                                        <span class="text-lg font-semibold">Subtotal:</span>
+                                        <span class="text-lg">₹<%= subtotal %></span>
+                                    </div>
+
+                                    <hr class="border-gray-200 my-4" />
+
+                                    <!-- Example shipping & tax (hard-coded or dynamic) -->
+                                    <div class="flex justify-between mb-2">
+                                        <span>Shipping:</span>
+                                        <span>₹50</span> <!-- or however you compute shipping -->
+                                    </div>
+                                    <div class="flex justify-between mb-4">
+                                        <span>Tax:</span>
+                                        <span>₹<%= Math.round(subtotal * 0.05) %></span> <!-- 5% example tax -->
+                                    </div>
+
+                                    <!-- Final total -->
+                                    <div class="flex justify-between mb-4">
+                                        <span class="text-lg font-semibold">Total:</span>
+                                        <span class="text-lg font-semibold">₹<%= subtotal + 50 + Math.round(subtotal *
+                                                0.05) %></span>
+                                    </div>
+                    </div>
+                </div>
+                <% } %>
+    </div>
+
+    <%- include('partials/footer') %>
