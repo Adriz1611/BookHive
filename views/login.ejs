@@ -2,55 +2,64 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login · BookHive</title>
+
+    <!-- Tailwind + fonts -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;600&display=swap" rel="stylesheet" />
 </head>
 
+<body class="min-h-screen flex">
+    <!-- ── Form column ── -->
+    <section class="flex-1 flex flex-col justify-center items-center p-8 font-[Newsreader]">
 
+        <h1 class="text-4xl font-semibold mb-6 text-[#1a3a3a]">Login</h1>
 
-<div class="flex min-h-screen">
-    <!-- Left Section: Login Form -->
-    <div class="flex-1 flex flex-col justify-center items-center p-8 bg-white font-[Newsreader]">
-        <h1 class="text-4xl  text-black mb-8 font-medium">Login</h1>
-        <form action="/users/login" method="POST" class="w-full max-w-md space-y-6">
-            <div>
-                <label for="email" class="block text-gray-700 font-medium mb-2">Email Id</label>
-                <input type="email" id="email" name="email" required
-                    class="w-full px-4 py-3 border rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-900 focus:border-transparent">
+        <!-- 🔴 ERROR MESSAGE (if any) -->
+        <% if (error && error.length) { %>
+            <div class="w-full max-w-md mb-6">
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+                    <i class="ri-error-warning-line mr-1"></i>
+                    <%= error[0] %>
+                </div>
             </div>
-            <div>
-                <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
-                <input type="password" id="password" name="password" required
-                    class="w-full px-4 py-3 border rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-900 focus:border-transparent">
-            </div>
-            <button type="submit"
-                class="w-full bg-green-900 text-white font-medium py-3 rounded-md hover:bg-green-800 transition">
-                Login
-            </button>
-        </form>
-        <p class="mt-6 text-gray-700">
-            New to Bookhive?
-            <a href="/signup" class="text-green-900 font-medium hover:underline">Signup</a>
-        </p>
-    </div>
+            <% } %>
 
-    <!-- Right Section: Image -->
-    <div class="hidden md:flex flex-1">
-        <img src="/images/login-cover.jpg" alt="Book Display" class="w-full h-full object-cover max-w-full max-h-screen">
-    </div> 
-    </div>
-</div>
-    
-           
+                <!-- Login form -->
+                <form action="/users/login" method="POST" class="w-full max-w-md space-y-5">
+
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-1" for="email">Email address</label>
+                        <input id="email" name="email" type="email" required autocomplete="email" class="w-full px-4 py-3 rounded-md border border-gray-300
+                      focus:outline-none focus:ring-2 focus:ring-[#1a3a3a]" />
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-1" for="password">Password</label>
+                        <input id="password" name="password" type="password" required autocomplete="current-password"
+                            class="w-full px-4 py-3 rounded-md border border-gray-300
+                      focus:outline-none focus:ring-2 focus:ring-[#1a3a3a]" />
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-3 bg-[#1a3a3a] text-white rounded-md font-medium hover:opacity-90">
+                        Log in
+                    </button>
+                </form>
+
+                <p class="mt-6 text-gray-700">
+                    New to BookHive?
+                    <a href="/signup" class="text-[#1a3a3a] font-medium hover:underline">Create an account</a>
+                </p>
+    </section>
+
+    <!-- ── Illustration column ── -->
+    <section class="hidden md:block flex-1">
+        <img src="/images/login-cover.jpg" alt="Books" class="w-full h-full object-cover" />
+    </section>
+</body>
+
+</html>

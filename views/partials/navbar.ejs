@@ -2,40 +2,80 @@
 <nav class="w-full bg-white shadow-md">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-24">
-      <!-- Logo Section -->
-      <div class="flex-shrink-0">
-        <!-- Add your logo here -->
-      </div>
 
-      <!-- Desktop Menu -->
-      <div class="hidden md:flex items-center space-x-4">
-        <div class="flex items-center gap-6 lg:gap-8">
-          <a href="/"
-            class="px-4 py-2 rounded-lg transition-colors <%= activePage === 'home' ? 'bg-[#1a3a3a] text-white' : 'text-black hover:text-green-900 hover:bg-gray-100' %>">
-            HOME
-          </a>
-          <a href="/shop"
-            class="px-4 py-2 rounded-lg transition-colors <%= activePage === 'shop' ? 'bg-[#1a3a3a] text-white' : 'text-black hover:text-green-900 hover:bg-gray-100' %>">
-            STORE
-          </a>
-          <a href="/blog"
-            class="px-4 py-2 rounded-lg transition-colors <%= activePage === 'blog' ? 'bg-[#1a3a3a] text-white' : 'text-black hover:text-green-900 hover:bg-gray-100' %>">
-            BLOG
-          </a>
-          <a href="/login"
-            class="px-4 py-2 rounded-lg transition-colors <%= activePage === 'login' ? 'bg-[#1a3a3a] text-white' : 'text-black hover:text-green-900 hover:bg-gray-100' %>">
+      <!-- Logo (add yours if you like) -->
+      <div class="flex-shrink-0"></div>
+
+      <!-- Desktop menu -->
+      <div class="hidden md:flex items-center space-x-6 lg:space-x-8">
+
+        <a href="/" class="px-4 py-2 rounded-lg transition-colors
+                  <%= activePage === 'home'
+                        ? 'bg-[#1a3a3a] text-white'
+                        : 'text-black hover:text-green-900 hover:bg-gray-100' %>">
+          HOME
+        </a>
+
+        <a href="/shop" class="px-4 py-2 rounded-lg transition-colors
+                  <%= activePage === 'shop'
+                        ? 'bg-[#1a3a3a] text-white'
+                        : 'text-black hover:text-green-900 hover:bg-gray-100' %>">
+          STORE
+        </a>
+
+        <a href="/blog" class="px-4 py-2 rounded-lg transition-colors
+                  <%= activePage === 'blog'
+                        ? 'bg-[#1a3a3a] text-white'
+                        : 'text-black hover:text-green-900 hover:bg-gray-100' %>">
+          BLOG
+        </a>
+
+        <!-- ───────── Auth section ───────── -->
+        <% if (!user) { %>
+          <!-- Guest view → LOGIN -->
+          <a href="/login" class="px-4 py-2 rounded-lg transition-colors
+                    <%= activePage === 'login'
+                          ? 'bg-[#1a3a3a] text-white'
+                          : 'text-black hover:text-green-900 hover:bg-gray-100' %>">
             LOGIN
           </a>
-        </div>
+
+          <% } else { %>
+            <!-- Logged-in view → profile icon + dropdown -->
+            <div class="relative group">
+              <button type="button" class="text-2xl text-[#1a3a3a] hover:text-green-900 focus:outline-none">
+                <i class="ri-user-3-line"></i>
+              </button>
+
+              <!-- Dropdown -->
+              <div class="hidden group-hover:block absolute right-0 mt-3 w-48 bg-white
+                     border border-gray-200 rounded-lg shadow-lg z-20">
+
+                <!-- user e-mail -->
+                <p class="px-4 py-3 text-sm text-gray-700 break-all border-b">
+                  <%= user.email %>
+                </p>
+
+                <!-- Edit profile -->
+                <a href="/profile/edit" class="block px-4 py-3 text-sm text-green-700 hover:bg-gray-50 border-b">
+                  Edit profile
+                </a>
+
+                <!-- Logout  ✅ -->
+                <a href="/users/logout" class="block px-4 py-3 text-sm text-red-600 hover:bg-gray-50">
+                  Logout
+                </a>
+              </div>
+            </div>
+            <% } %>
       </div>
 
-      <!-- Mobile Menu Button (Hidden on desktop) -->
+      <!-- Mobile burger (unchanged) -->
       <div class="md:hidden">
-        <button type="button"
-          class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100">
+        <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400
+                       hover:text-gray-500 hover:bg-gray-100">
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M4 6h16M4 12h16M4 18h16" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>

@@ -1,9 +1,11 @@
+/* ───────────────────────── app.js ───────────────────────── */
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser");
 const path = require("path");
 const expressSession = require("express-session");
 const flash = require("connect-flash");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 /* ── routers ─────────────────────────────── */
@@ -19,7 +21,7 @@ const cartRouter = require("./routes/cartRouter");
 const checkoutRouter = require("./routes/checkoutRouter");
 
 /* ── db ───────────────────────────────────── */
-require("./config/mongoose-connection"); // just require; it connects
+require("./config/mongoose-connection");
 
 /* ── global middlewares ───────────────────── */
 app.use(express.json());
@@ -35,6 +37,27 @@ app.use(
 );
 app.use(flash());
 
+/* 🟢  Make the logged-in user & flash messages available to EVERY view */
+app.use(async (req, res, next) => {
+  /* expose user */
+  res.locals.user = null;
+  const token = req.cookies.token;
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_KEY);
+      const User = require("./models/user-model");
+      res.locals.user = await User.findById(decoded.id).select("email");
+    } catch (_) {
+      /* invalid / expired → ignore */
+    }
+  }
+
+  /* expose flash messages */
+  res.locals.error = req.flash("error");
+  res.locals.success = req.flash("success");
+  next();
+});
+
 /* ── static / views ───────────────────────── */
 app.use("/upload", express.static("upload"));
 app.use(express.static(path.join(__dirname, "public")));
@@ -42,9 +65,9 @@ app.set("view engine", "ejs");
 
 /* ── route-mounting order ─────────────────── */
 app.use("/", homeRouter);
-app.use("/login", loginRouter);
-app.use("/signup", signupRouter); // GET page only
-app.use("/users", usersRouter); // POST login/register + logout
+app.use("/login", loginRouter); /* GET only            */
+app.use("/signup", signupRouter); /* GET only            */
+app.use("/users", usersRouter); /* auth actions        */
 app.use("/owners", ownersRouter);
 app.use("/product", bookRoutes);
 app.use("/products", productsCreateRouter);
@@ -52,7 +75,7 @@ app.use("/blog", blogRouter);
 app.use("/cart", cartRouter);
 app.use("/checkout", checkoutRouter);
 
-/* ── fallback 404 (optional) ──────────────── */
+/* ── 404 fallback ─────────────────────────── */
 app.all("*", (_req, res) => res.status(404).send("Route not found"));
 
 /* ── start server ─────────────────────────── */

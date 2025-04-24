@@ -1,20 +1,15 @@
+/* ─────────────────── routes/usersRouter.js ─────────────────── */
 const express = require("express");
 const router = express.Router();
+const authController = require("../controllers/authController");
 
-const {
-  registerUser,
-  loginUser,
-  logoutUser,
-} = require("../controllers/authController");
+/* Register  */
+router.post("/register", authController.registerUser);
 
-/* ── POST routes ─────────────────────────── */
-router.post("/register", registerUser); // ← used by the fixed signup form
-router.post("/login", loginUser);
+/* Login     */
+router.post("/login", authController.loginUser);
 
-/* optional alias: keeps the old URL working too */
-router.post("/signup", registerUser);
-
-/* ── GET route ───────────────────────────── */
-router.get("/logout", logoutUser);
+/* Logout    ── simple GET is fine because we’re only clearing a cookie */
+router.get("/logout", authController.logoutUser);
 
 module.exports = router;
