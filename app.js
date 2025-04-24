@@ -4,9 +4,9 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const expressSession = require("express-session");
 const flash = require("connect-flash");
-
 require("dotenv").config();
 
+/* ── routers ─────────────────────────────── */
 const ownersRouter = require("./routes/ownersRouter");
 const productsCreateRouter = require("./routes/productsCreateRouter");
 const usersRouter = require("./routes/usersRouter");
@@ -18,11 +18,14 @@ const bookRoutes = require("./routes/bookRoutes");
 const cartRouter = require("./routes/cartRouter");
 const checkoutRouter = require("./routes/checkoutRouter");
 
-const db = require("./config/mongoose-connection");
+/* ── db ───────────────────────────────────── */
+require("./config/mongoose-connection"); // just require; it connects
 
+/* ── global middlewares ───────────────────── */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 app.use(
   expressSession({
     resave: false,
@@ -31,20 +34,28 @@ app.use(
   })
 );
 app.use(flash());
+
+/* ── static / views ───────────────────────── */
 app.use("/upload", express.static("upload"));
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 
+/* ── route-mounting order ─────────────────── */
 app.use("/", homeRouter);
 app.use("/login", loginRouter);
+app.use("/signup", signupRouter); // GET page only
+app.use("/users", usersRouter); // POST login/register + logout
 app.use("/owners", ownersRouter);
-app.use("/users", usersRouter);
-app.use("/product", bookRoutes);//dynamic routing
-app.use("/products", productsCreateRouter);//product creation
-app.use("/signup",signupRouter);
-app.use("/blog",blogRouter);
+app.use("/product", bookRoutes);
+app.use("/products", productsCreateRouter);
+app.use("/blog", blogRouter);
 app.use("/cart", cartRouter);
 app.use("/checkout", checkoutRouter);
 
+/* ── fallback 404 (optional) ──────────────── */
+app.all("*", (_req, res) => res.status(404).send("Route not found"));
 
-app.listen(3000);
+/* ── start server ─────────────────────────── */
+app.listen(3000, () =>
+  console.log("➜  Server listening on http://localhost:3000")
+);

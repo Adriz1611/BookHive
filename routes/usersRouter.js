@@ -1,20 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const isloggedin = require("../middlewares/isLoggedIn");
+
 const {
   registerUser,
   loginUser,
-  logout,
+  logoutUser,
 } = require("../controllers/authController");
 
-router.get("/", function (req, res) {
-  res.send("hey it's working");
-});
-
-router.post("/register", registerUser);
-
+/* ── POST routes ─────────────────────────── */
+router.post("/register", registerUser); // ← used by the fixed signup form
 router.post("/login", loginUser);
 
-router.get("/logout", logout);
+/* optional alias: keeps the old URL working too */
+router.post("/signup", registerUser);
+
+/* ── GET route ───────────────────────────── */
+router.get("/logout", logoutUser);
 
 module.exports = router;
