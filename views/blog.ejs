@@ -1,69 +1,95 @@
 <%- include("./partials/header") %>
     <%- include("./partials/navbar") %>
 
-        <!-- Banner Section -->
-        <div class="w-full h-[300px] bg-cover bg-center relative flex items-center justify-center"
-            style="background-image: url('/images/blog-banner.jpg');">
-            
-        </div>
+        <!-- ───── Hero / banner ───── -->
+        <section class="relative h-[35vh] w-full overflow-hidden">
+            <img src="/images/blog-banner.jpg" alt="Blog banner"
+                class="absolute inset-0 w-full h-full object-cover object-center" />
+            <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40"></div>
 
-        <!-- Main Content Container -->
-        <div class="max-w-6xl mx-auto px-4 py-12 font-[Raleway] ">
-
-            <!-- Book Entry #1 -->
-            <div class="flex flex-col md:flex-row items-start gap-4 py-6 border-b last:border-b-0">
-                <!-- Image Placeholder -->
-                <div class="w-full md:w-32 h-48 bg-gray-200 flex items-center justify-center text-gray-500 shrink-0">
-                    <span>No Image</span>
-                </div>
-                <!-- Text Content -->
-                <div class="flex-1">
-                    <h2 class="text-xl md:text-2xl font-semibold  mb-2">
-                        The Great Gatsby
-                    </h2>
-                    <p class="text-gray-600 leading-relaxed">
-                        “The Great Gatsby,” a novel by F. Scott Fitzgerald, follows the story of Jay Gatsby and his
-                        unrequited love for Daisy Buchanan.
-                    </p>
-                </div>
+            <div class="relative z-10 flex items-center justify-center h-full">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-semibold text-white tracking-wide font-[Newsreader]">
+                    Latest&nbsp;Stories
+                </h1>
             </div>
+        </section>
 
-            <!-- Book Entry #2 -->
-            <div class="flex flex-col md:flex-row items-start gap-4 py-6 border-b last:border-b-0">
-                <!-- Image Placeholder -->
-                <div class="w-full md:w-32 h-48 bg-gray-200 flex items-center justify-center text-gray-500 shrink-0">
-                    <span>No Image</span>
-                </div>
-                <!-- Text Content -->
-                <div class="flex-1">
-                    <h2 class="text-xl md:text-2xl font-semibold text-gray-800 mb-2">
-                        To Kill a Mockingbird
-                    </h2>
-                    <p class="text-gray-600 leading-relaxed">
-                        Harper Lee’s timeless novel addresses racial injustice and moral growth, as seen through the
-                        eyes of young Scout Finch.
-                    </p>
-                </div>
+        <!-- ───── Posts grid ───── -->
+        <main class="max-w-7xl mx-auto px-4 py-16 font-[Raleway]">
+            <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+
+                <!-- ── Post card #1 ── -->
+                <article class="group bg-white rounded-xl shadow-sm hover:shadow-lg transition">
+                    <div class="relative h-56 overflow-hidden rounded-t-xl bg-gray-200">
+                        <!-- If you have a real image, drop it here; otherwise gray placeholder shows -->
+                        <img src="/images/great-gatsby.jpeg" onerror="this.style.display='none'" alt="The Great Gatsby"
+                            class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                    </div>
+
+                    <div class="p-6 flex flex-col">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2 group-hover:text-[#1a3a3a] transition">
+                            The Great Gatsby
+                        </h2>
+                        <p class="text-gray-600 leading-relaxed flex-1">
+                            “The Great Gatsby,” a novel by F. Scott Fitzgerald, follows the story of
+                            Jay Gatsby and his unrequited love for Daisy Buchanan.
+                        </p>
+
+                        <a href="#" class="mt-4 inline-flex items-center text-[#1a3a3a] font-medium hover:underline">
+                            Read more
+                            <i class="ri-arrow-right-line ml-1 text-lg"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- ── Post card #2 ── -->
+                <article class="group bg-white rounded-xl shadow-sm hover:shadow-lg transition">
+                    <div class="relative h-56 overflow-hidden rounded-t-xl bg-gray-200">
+                        <img src="/images/book-cover-To-Kill-a-Mockingbird-many-1961.webp" onerror="this.style.display='none'"
+                            alt="To Kill a Mockingbird"
+                            class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                    </div>
+
+                    <div class="p-6 flex flex-col">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2 group-hover:text-[#1a3a3a] transition">
+                            To Kill a Mockingbird
+                        </h2>
+                        <p class="text-gray-600 leading-relaxed flex-1">
+                            Harper Lee’s timeless novel tackles racial injustice and moral growth
+                            through the eyes of young Scout Finch.
+                        </p>
+
+                        <a href="#" class="mt-4 inline-flex items-center text-[#1a3a3a] font-medium hover:underline">
+                            Read more
+                            <i class="ri-arrow-right-line ml-1 text-lg"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- ── Post card #3 ── -->
+                <article class="group bg-white rounded-xl shadow-sm hover:shadow-lg transition">
+                    <div class="relative h-56 overflow-hidden rounded-t-xl bg-gray-200">
+                        <img src="/images/pride.jpg" onerror="this.style.display='none'" alt="Pride and Prejudice"
+                            class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+                    </div>
+
+                    <div class="p-6 flex flex-col">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-2 group-hover:text-[#1a3a3a] transition">
+                            Pride and Prejudice
+                        </h2>
+                        <p class="text-gray-600 leading-relaxed flex-1">
+                            Jane Austen explores class, family, and the pitfalls of first impressions
+                            in Regency-era England.
+                        </p>
+
+                        <a href="#" class="mt-4 inline-flex items-center text-[#1a3a3a] font-medium hover:underline">
+                            Read more
+                            <i class="ri-arrow-right-line ml-1 text-lg"></i>
+                        </a>
+                    </div>
+                </article>
+
             </div>
-
-            <!-- Book Entry #3 -->
-            <div class="flex flex-col md:flex-row items-start gap-4 py-6 border-b last:border-b-0">
-                <!-- Image Placeholder -->
-                <div class="w-full md:w-32 h-48 bg-gray-200 flex items-center justify-center text-gray-500 shrink-0">
-                    <span>No Image</span>
-                </div>
-                <!-- Text Content -->
-                <div class="flex-1">
-                    <h2 class="text-xl md:text-2xl font-semibold text-gray-800 mb-2">
-                        Pride and Prejudice
-                    </h2>
-                    <p class="text-gray-600 leading-relaxed">
-                        Jane Austen’s classic romance explores themes of class, family, and the perils of first
-                        impressions in Regency-era England.
-                    </p>
-                </div>
-            </div>
-
-        </div>
+        </main>
 
         <%- include("./partials/footer") %>

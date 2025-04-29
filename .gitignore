@@ -9,3 +9,4 @@ upload/*
 
 # Except the upload directory itself
 !upload/
+.vercel
