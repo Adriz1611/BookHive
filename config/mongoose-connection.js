@@ -1,4 +1,4 @@
-```/* ───────── config/mongoose-connection.js ───────── */
+
 const mongoose = require("mongoose");
 require("dotenv").config(); // <-- load .env
 
@@ -19,4 +19,3 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
-```;
