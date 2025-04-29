@@ -1,14 +1,22 @@
+```/* ───────── config/mongoose-connection.js ───────── */
 const mongoose = require("mongoose");
-const config = require("config");
-const dbgr=require("debug")("development:mongoose");
+require("dotenv").config(); // <-- load .env
 
-mongoose
-  .connect(`${config.get("MONGODB_URI")}/bookhive`)
-  .then(function () {
-    dbgr("connected");
-  })
-  .catch(function (err) {
-    dbgr(err);
-  });
+const uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/bookhive";
 
-module.exports = mongoose.connection;
+const connectDB = async () => {
+  try {
+    await mongoose.connect(uri, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 10000, // 10 s just like before
+    });
+    console.log("✅  MongoDB connected");
+  } catch (err) {
+    console.error("❌  MongoDB connection failed:", err.message);
+    throw err; // let caller decide what to do
+  }
+};
+
+module.exports = connectDB;
+```;
