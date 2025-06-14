@@ -10,10 +10,8 @@ const expressSession    = require("express-session");
 const flash             = require("connect-flash");
 const jwt               = require("jsonwebtoken");
 
-/* ── DB ──────────────────────────────────────────────────── */
-const connectDB         = require("./config/mongoose-connection"); // exports async fn
+const connectDB         = require("./config/mongoose-connection"); 
 
-/* ── Routers ─────────────────────────────────────────────── */
 const ownersRouter      = require("./routes/ownersRouter");
 const productsCreateRouter = require("./routes/productsCreateRouter");
 const usersRouter       = require("./routes/usersRouter");
@@ -25,7 +23,6 @@ const bookRoutes        = require("./routes/bookRoutes");
 const cartRouter        = require("./routes/cartRouter");
 const checkoutRouter    = require("./routes/checkoutRouter");
 
-/* ── Global middle-ware ─────────────────────────────────── */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -39,7 +36,6 @@ app.use(
 );
 app.use(flash());
 
-/* 🟢  Inject logged-in user + flash messages into every view */
 app.use(async (req, res, next) => {
   res.locals.user = null;
 
@@ -50,7 +46,7 @@ app.use(async (req, res, next) => {
       const User = require("./models/user-model");
       res.locals.user = await User.findById(decoded.id).select("email");
     } catch (_) {
-      /* invalid / expired → ignore silently */
+   
     }
   }
 
@@ -59,16 +55,15 @@ app.use(async (req, res, next) => {
   next();
 });
 
-/* ── Static assets / views ──────────────────────────────── */
 app.use("/upload", express.static("upload"));                 // uploaded images
 app.use(express.static(path.join(__dirname, "public")));      // css, js, etc.
 app.set("view engine", "ejs");
 
-/* ── Route mounting order ───────────────────────────────── */
+
 app.use("/",         homeRouter);
-app.use("/login",    loginRouter);          // GET + POST inside router
+app.use("/login",    loginRouter);          
 app.use("/signup",   signupRouter);
-app.use("/users",    usersRouter);          // auth actions
+app.use("/users",    usersRouter);          
 app.use("/owners",   ownersRouter);
 app.use("/product",  bookRoutes);
 app.use("/products", productsCreateRouter);
@@ -79,7 +74,7 @@ app.use("/checkout", checkoutRouter);
 /* ── 404 fallback ───────────────────────────────────────── */
 app.all("*", (_req, res) => res.status(404).send("Route not found"));
 
-/* ── Start server after successful DB connection ─────── */
+
 (async () => {
   try {
     await connectDB();                      // wait until MongoDB is ready
@@ -88,7 +83,7 @@ app.all("*", (_req, res) => res.status(404).send("Route not found"));
       console.log('➜  Server listening on http://localhost:${PORT}')
     );
   } catch (err) {
-    console.error("❌  MongoDB connection failed:", err.message);
+    console.error(" MongoDB connection failed:", err.message);
     process.exit(1);                        // fail fast – don’t start half-broken
   }
 })();
