@@ -1,13 +1,22 @@
 {
   "name": "bookhive",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "BookHive - A full-stack Express and EJS-based book management system",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"No build step required\""
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./public/css/styles.css --minify",
+    "build": "npm run build:css"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "express",
+    "ejs",
+    "mongodb",
+    "tailwindcss",
+    "bookstore"
+  ],
+  "author": "Your Name",
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^10.4.20",
@@ -28,7 +37,6 @@
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17"
   },
-  "description": "",
   "devDependencies": {
     "nodemon": "^3.1.10"
   }
